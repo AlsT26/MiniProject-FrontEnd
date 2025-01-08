@@ -1,14 +1,5 @@
 "use client";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-} from "chart.js";
+import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from "chart.js";
 import { Line } from "react-chartjs-2";
 import NavbarPromotor from "@/components/NavbarPromotor";
 import React, { useEffect, useState } from "react";
@@ -16,15 +7,7 @@ import adminGuard from "@/hoc/adminGuard";
 import { IEvent, ITicket } from "@/types/event";
 import { useRouter } from "next/navigation";
 import { jwtDecode } from "jwt-decode";
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-);
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 interface DecodedUser {
   id: number;
   email: string;
@@ -38,24 +21,11 @@ const Dashboard = () => {
   const [tickets, setTickets] = useState<ITicket[] | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const data = {
-    labels: [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ],
+    labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
     datasets: [
       {
         label: "Sales",
-        data: [3,0,0,0,0,0,0,0,0,0,0,0],
+        data: [4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         borderColor: "#4F46E5",
         backgroundColor: "rgba(79, 70, 229, 0.2)",
       },
@@ -114,33 +84,20 @@ const Dashboard = () => {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
             <div className="rounded-lg bg-white p-6 shadow">
-              <h2 className="text-lg font-medium text-gray-500">
-                Event created
-              </h2>
-              <p className="mt-2 text-2xl font-bold text-gray-900">
-                {
-                  events.filter((event) => event.promotorId === decodedUser.id)
-                    .length
-                }
-              </p>
+              <h2 className="text-lg font-medium text-gray-500">Event created</h2>
+              <p className="mt-2 text-2xl font-bold text-gray-900">{events.filter((event) => event.promotorId === decodedUser.id).length}</p>
             </div>
             <div className="rounded-lg bg-white p-6 shadow">
               <h2 className="text-lg font-medium text-gray-500">Ticket Sold</h2>
-              <p className="mt-2 text-2xl font-bold text-gray-900">
-              3
-              </p>
+              <p className="mt-2 text-2xl font-bold text-gray-900">4</p>
             </div>
             <div className="rounded-lg bg-white p-6 shadow">
-              <h2 className="text-lg font-medium text-gray-500">
-                Total Revenue
-              </h2>
-              <p className="mt-2 text-2xl font-bold text-gray-900">IDR 3.000.000</p>
+              <h2 className="text-lg font-medium text-gray-500">Total Revenue</h2>
+              <p className="mt-2 text-2xl font-bold text-gray-900">IDR 4.000.000</p>
             </div>
           </div>
           <div className="mt-8 rounded-lg bg-white p-6 shadow">
-            <h2 className="text-xl font-semibold text-gray-800">
-              Sales Statistics
-            </h2>
+            <h2 className="text-xl font-semibold text-gray-800">Sales Statistics</h2>
             <div className="mt-4 min-h-[400px]">
               <Line data={data} options={options} />
             </div>
@@ -151,4 +108,4 @@ const Dashboard = () => {
   );
 };
 
-export default adminGuard(Dashboard);
+export default adminGuard(Dashboard, ["Promotor"]);
