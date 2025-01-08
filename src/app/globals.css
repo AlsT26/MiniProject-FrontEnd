@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+#nav {
+  font-size: calc(8px + 1vw);
+}
+/* @media (prefers-color-scheme: dark) {
+  :root {
+    --background: rgb(100, 100, 100);
+    --foreground: #ededed;
+  }
+} */
+
+@media screen and (max-width: 768px) {
+  #illustration {
+    display: none;
+  }
+  #search {
+    display: none;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
